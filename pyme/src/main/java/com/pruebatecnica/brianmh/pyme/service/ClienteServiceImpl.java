@@ -23,4 +23,19 @@ public class ClienteServiceImpl implements ClienteService {
         return repository.save(cliente);
     }
 
+    @Override
+    public Cliente getById(Long id) {
+        return repository.findById(id).get();
+    }
+
+    @Override
+    public Cliente updateCliente(Cliente cliente) {
+        return repository.save(cliente);
+    }
+
+    @Override
+    public void deleteCliente(Long id) {
+        repository.deleteById(id);
+    }
+
 }

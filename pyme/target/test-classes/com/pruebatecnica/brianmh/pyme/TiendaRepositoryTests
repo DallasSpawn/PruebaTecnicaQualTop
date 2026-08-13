@@ -1,0 +1,35 @@
+package com.pruebatecnica.brianmh.pyme;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pruebatecnica.brianmh.pyme.entity.Tienda;
+import com.pruebatecnica.brianmh.pyme.repository.TiendaRepository;
+
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+class TiendaRepositoryTests {
+
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private TiendaRepository TiendaRepository;
+
+    @Test
+    public void whenFindByName_thenReturnTienda() {
+        Tienda tienda = new Tienda("Oxxo Altamira");
+        entityManager.persist(tienda);
+        entityManager.flush();
+
+        
+        Tienda found = tiendaRepository.findByName(tienda.getName());
+
+        
+        assertThat(found.getName())
+        .isEqualTo(tienda.getName());
+    }
+
+}
